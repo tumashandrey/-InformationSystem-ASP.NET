@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Orders" EntityType="DbModel.Orders" />
+    <EntitySet Name="ProductGroups" EntityType="DbModel.ProductGroups" />
+    <EntitySet Name="Products" EntityType="DbModel.Products" />
+    <EntitySet Name="Users" EntityType="DbModel.Users" />
+    <AssociationSet Name="FK_Orders_Products" Association="DbModel.FK_Orders_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Users" Association="DbModel.FK_Orders_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductGroups_ProductGroups" Association="DbModel.FK_ProductGroups_ProductGroups">
+      <End Role="ProductGroups" EntitySet="ProductGroups" />
+      <End Role="ProductGroups1" EntitySet="ProductGroups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_ProductGroups" Association="DbModel.FK_Products_ProductGroups">
+      <End Role="ProductGroups" EntitySet="ProductGroups" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="Summ" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IsPayed" Type="Boolean" Nullable="false" />
+    <Property Name="PatedDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Products" Relationship="DbModel.FK_Orders_Products" FromRole="Orders" ToRole="Products" />
+    <NavigationProperty Name="Users" Relationship="DbModel.FK_Orders_Users" FromRole="Orders" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="ProductGroups">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ParentID" Type="Int32" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ProductGroups1" Relationship="DbModel.FK_ProductGroups_ProductGroups" FromRole="ProductGroups" ToRole="ProductGroups1" />
+    <NavigationProperty Name="ProductGroups2" Relationship="DbModel.FK_ProductGroups_ProductGroups" FromRole="ProductGroups1" ToRole="ProductGroups" />
+    <NavigationProperty Name="Products" Relationship="DbModel.FK_Products_ProductGroups" FromRole="ProductGroups" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GroupID" Type="Int32" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Code" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="VendorCode" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ProductType" Type="Byte" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" />
+    <NavigationProperty Name="Orders" Relationship="DbModel.FK_Orders_Products" FromRole="Products" ToRole="Orders" />
+    <NavigationProperty Name="ProductGroups" Relationship="DbModel.FK_Products_ProductGroups" FromRole="Products" ToRole="ProductGroups" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Orders" Relationship="DbModel.FK_Orders_Users" FromRole="Users" ToRole="Orders" />
+  </EntityType>
+  <Association Name="FK_Orders_Products">
+    <End Type="DbModel.Products" Role="Products" Multiplicity="1" />
+    <End Type="DbModel.Orders" Role="Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Users">
+    <End Type="DbModel.Users" Role="Users" Multiplicity="1" />
+    <End Type="DbModel.Orders" Role="Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductGroups_ProductGroups">
+    <End Type="DbModel.ProductGroups" Role="ProductGroups" Multiplicity="0..1" />
+    <End Type="DbModel.ProductGroups" Role="ProductGroups1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductGroups">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProductGroups1">
+        <PropertyRef Name="ParentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_ProductGroups">
+    <End Type="DbModel.ProductGroups" Role="ProductGroups" Multiplicity="0..1" />
+    <End Type="DbModel.Products" Role="Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductGroups">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

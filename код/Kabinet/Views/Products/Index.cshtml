@@ -1,0 +1,145 @@
+﻿@model ProductsList
+@using Kabinet.Models
+@{
+    ViewBag.Title = "Товары";
+}
+<div class="header" style="height: 150px;">
+    <h1>Товары</h1>
+    <div class="searchString__svg-icon"><md-icon md-svg-icon="search" role="img" aria-label="search"><svg id="search" viewBox="0 0 24 24" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg></md-icon>
+    </div>
+    @Html.TextBoxFor(m => m.SearchString, new {@placeholder = "Поиск...", @class = "searchString", @onkeyup = "Search()" })
+    <div class="sortBy__svg-icon">
+        <md-icon class="lk-goods__data-menu-toggler-icon lk-goods__data-menu-toggler-icon--left" md-svg-icon="sort" role="img" aria-label="sort"><svg id="sort" viewBox="0 0 24 24" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false"><path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z"></path></svg></md-icon>
+    </div>
+    @Html.DropDownListFor(m => m.SortBy, Model.SortByItems, new {@class = "sortByItems", @onchange = "RefreshProductsList()" })
+    <div onclick="NewProduct(); " class="addProduct" title="Добавить товар">
+        <md-icon class="lk-animate-if ng-scope" ng-if="$ctrl.isFabOpen" md-svg-icon="local_mall" role="img" aria-hidden="true" style=""><svg id="local_mall" viewBox="0 0 24 24" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false"><path d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-1.99.9-1.99 2L3 20c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm0 10c-2.76 0-5-2.24-5-5h2c0 1.66 1.34 3 3 3s3-1.34 3-3h2c0 2.76-2.24 5-5 5z"></path></svg></md-icon>
+    </div>
+    <div onclick="NewDepartment(); " class="addDepartment" title="Добавить группу">
+        <md-icon md-svg-icon="library_add" class="ng-scope md-lk-blue-theme" role="img" aria-label="library_add"><svg id="library_add" viewBox="0 0 24 24" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9h-4v4h-2v-4H9V9h4V5h2v4h4v2z"></path></svg></md-icon>
+    </div>
+</div>
+<div id="productsList">
+    @Html.Action("ProductsList")
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        function ToggleDepartmentMenu(departmentId) {
+            $(".department-menu").not("#departmentMenu_" + departmentId).hide();
+            //$("#departmentMenu_" + departmentId).css("right", $("#departmentMenuOpener_" + departmentId).css("right"));
+            $("#departmentMenu_" + departmentId).toggle();
+        }
+        function UploadImage(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var res = e.target.result;
+                    //var base64 = { _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=", encode: function (e) { var t = ""; var n, r, i, s, o, u, a; var f = 0; e = Base64._utf8_encode(e); while (f < e.length) { n = e.charCodeAt(f++); r = e.charCodeAt(f++); i = e.charCodeAt(f++); s = n >> 2; o = (n & 3) << 4 | r >> 4; u = (r & 15) << 2 | i >> 6; a = i & 63; if (isNaN(r)) { u = a = 64 } else if (isNaN(i)) { a = 64 } t = t + this._keyStr.charAt(s) + this._keyStr.charAt(o) + this._keyStr.charAt(u) + this._keyStr.charAt(a) } return t }, decode: function (e) { var t = ""; var n, r, i; var s, o, u, a; var f = 0; e = e.replace(/[^A-Za-z0-9+/=]/g, ""); while (f < e.length) { s = this._keyStr.indexOf(e.charAt(f++)); o = this._keyStr.indexOf(e.charAt(f++)); u = this._keyStr.indexOf(e.charAt(f++)); a = this._keyStr.indexOf(e.charAt(f++)); n = s << 2 | o >> 4; r = (o & 15) << 4 | u >> 2; i = (u & 3) << 6 | a; t = t + String.fromCharCode(n); if (u != 64) { t = t + String.fromCharCode(r) } if (a != 64) { t = t + String.fromCharCode(i) } } t = Base64._utf8_decode(t); return t }, _utf8_encode: function (e) { e = e.replace(/rn/g, "n"); var t = ""; for (var n = 0; n < e.length; n++) { var r = e.charCodeAt(n); if (r < 128) { t += String.fromCharCode(r) } else if (r > 127 && r < 2048) { t += String.fromCharCode(r >> 6 | 192); t += String.fromCharCode(r & 63 | 128) } else { t += String.fromCharCode(r >> 12 | 224); t += String.fromCharCode(r >> 6 & 63 | 128); t += String.fromCharCode(r & 63 | 128) } } return t }, _utf8_decode: function (e) { var t = ""; var n = 0; var r = c1 = c2 = 0; while (n < e.length) { r = e.charCodeAt(n); if (r < 128) { t += String.fromCharCode(r); n++ } else if (r > 191 && r < 224) { c2 = e.charCodeAt(n + 1); t += String.fromCharCode((r & 31) << 6 | c2 & 63); n += 2 } else { c2 = e.charCodeAt(n + 1); c3 = e.charCodeAt(n + 2); t += String.fromCharCode((r & 15) << 12 | (c2 & 63) << 6 | c3 & 63); n += 3 } } return t } }
+                    $('#imgPhoto').attr('src', res);
+                    $('#PhotoUploaded').val(res);
+                    $('#imgPhoto').show();
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        function UploadImageDepartment(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var res = e.target.result;
+                    //var base64 = { _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=", encode: function (e) { var t = ""; var n, r, i, s, o, u, a; var f = 0; e = Base64._utf8_encode(e); while (f < e.length) { n = e.charCodeAt(f++); r = e.charCodeAt(f++); i = e.charCodeAt(f++); s = n >> 2; o = (n & 3) << 4 | r >> 4; u = (r & 15) << 2 | i >> 6; a = i & 63; if (isNaN(r)) { u = a = 64 } else if (isNaN(i)) { a = 64 } t = t + this._keyStr.charAt(s) + this._keyStr.charAt(o) + this._keyStr.charAt(u) + this._keyStr.charAt(a) } return t }, decode: function (e) { var t = ""; var n, r, i; var s, o, u, a; var f = 0; e = e.replace(/[^A-Za-z0-9+/=]/g, ""); while (f < e.length) { s = this._keyStr.indexOf(e.charAt(f++)); o = this._keyStr.indexOf(e.charAt(f++)); u = this._keyStr.indexOf(e.charAt(f++)); a = this._keyStr.indexOf(e.charAt(f++)); n = s << 2 | o >> 4; r = (o & 15) << 4 | u >> 2; i = (u & 3) << 6 | a; t = t + String.fromCharCode(n); if (u != 64) { t = t + String.fromCharCode(r) } if (a != 64) { t = t + String.fromCharCode(i) } } t = Base64._utf8_decode(t); return t }, _utf8_encode: function (e) { e = e.replace(/rn/g, "n"); var t = ""; for (var n = 0; n < e.length; n++) { var r = e.charCodeAt(n); if (r < 128) { t += String.fromCharCode(r) } else if (r > 127 && r < 2048) { t += String.fromCharCode(r >> 6 | 192); t += String.fromCharCode(r & 63 | 128) } else { t += String.fromCharCode(r >> 12 | 224); t += String.fromCharCode(r >> 6 & 63 | 128); t += String.fromCharCode(r & 63 | 128) } } return t }, _utf8_decode: function (e) { var t = ""; var n = 0; var r = c1 = c2 = 0; while (n < e.length) { r = e.charCodeAt(n); if (r < 128) { t += String.fromCharCode(r); n++ } else if (r > 191 && r < 224) { c2 = e.charCodeAt(n + 1); t += String.fromCharCode((r & 31) << 6 | c2 & 63); n += 2 } else { c2 = e.charCodeAt(n + 1); c3 = e.charCodeAt(n + 2); t += String.fromCharCode((r & 15) << 12 | (c2 & 63) << 6 | c3 & 63); n += 3 } } return t } }
+                    $('#imgPhotoDepartment').attr('src', res);
+                    $('#PhotoUploadedDepartment').val(res);
+                    $('#imgPhotoDepartment').show();
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        function Search() {
+            var search = $("#SearchString").val();
+            $("#productsList .product").show();
+            if (search.length > 0) {
+                search = search.toLowerCase();
+                $("#productsList .product").not("[data-item*='" + search + "']").hide();
+            }
+        }
+
+        function NewDepartment() {
+            $("#productForm").hide();
+            $("#departmentForm").load("/Products/NewDepartment");
+            $('#departmentForm').show();
+        }
+
+        function ShowDepartment(id) {
+            $("#productForm").hide();
+            $("#departmentForm").load("/Products/EditDepartment?id=" + id);
+            $('#departmentForm').show();
+        }
+
+        function CloseDepartmentForm() {
+            $("#departmentForm").hide();
+        }
+
+        function DeleteDepartment(id) {
+            //$.ajax({
+            //    url: "/Products/DeleteDepartment?id=" + id
+            //}).done(function () {
+            //    RefreshProductsList();
+            //});
+            window.location = "/Products/DeleteDepartment?id=" + id;
+        }
+
+        function DeleteProductsFromDepartment(id) {
+            $.ajax({
+                url: "/Products/DeleteProductsFromDepartment?id=" + id
+            }).done(function () {
+                RefreshProductsList();
+            });
+        }
+
+        function NewProduct() {
+            $("#departmentForm").hide();
+            $("#productForm").load("/Products/NewProduct");
+            $('#productForm').show();
+        }
+        
+        function NewProductToDepartment(id) {
+            $("#departmentForm").hide();
+            $("#productForm").load("/Products/NewProduct?departmentId=" + id);
+            $('#productForm').show();
+        }
+
+        function ShowProduct(id) {
+            $("#departmentForm").hide();
+            $("#productForm").load("/Products/EditProduct?id=" + id);
+            $('#productForm').show();
+        }
+
+        function CloseProductForm() {
+            $("#productForm").hide();
+        }
+
+        function DeleteProduct(id) {
+            //$.ajax({
+            //    url: "/Products/DeleteProduct?id=" + id
+            //}).done(function () {
+            //    RefreshProductsList();
+            //});
+            window.location = "/Products/Delete?id=" + id;
+        }
+
+        function RefreshProductsList(sortBy) {
+            var sortBy = $("#SortBy").val();
+            if (sortBy != null) {
+                $("#productsList").load("/Products/ProductsList?sortBy=" + sortBy);
+            } else {
+                $("#productsList").load("/Products/ProductsList");
+            }
+        }
+
+        function ToggleDepartmentProducts(departmentId) {
+            $(".productInDepartment_" + departmentId).toggle();
+        }
+    </script>
+}

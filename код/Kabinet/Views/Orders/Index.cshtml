@@ -1,0 +1,45 @@
+﻿@*@model OrdersList*@
+@using Kabinet.Models
+@{
+    ViewBag.Title = "Продажи";
+}
+<div class="header" style="height: 150px;">
+    <h2>Продажи</h2>
+    <br />
+    <button class="blue" onclick="NewOrder();">Добавить</button>
+</div>
+<div class="sc-page">
+    <div id="ordersList">
+        @Html.Action("OrdersList")
+    </div>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        function DeleteOrder(id) {
+            window.location = "/Orders/Delete?id=" + id;
+        }
+
+        function NewOrder() {
+            $("#orderForm").load("/Orders/NewOrder");
+            $('#orderForm').show();
+        }
+        
+        function ShowOrder(id) {
+            $("#orderForm").load("/Orders/EditOrder?id=" + id);
+            $('#orderForm').show();
+        }
+
+        function CloseOrderForm() {
+            $("#orderForm").hide();
+        }
+        
+        function RefreshOrdersList(sortBy) {
+            $("#ordersList").load("/Orders/OrdersList");
+        }
+
+        //function ToggleDepartmentProducts(departmentId) {
+        //    $(".productInDepartment_" + departmentId).toggle();
+        //}
+    </script>
+}

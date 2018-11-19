@@ -1,0 +1,27 @@
+﻿@using Kabinet.Models
+@model UserModel
+@{
+    ViewBag.Title = "Регистрация";
+    Layout = "/Views/Shared/_LayoutEmpty.cshtml";
+}
+<section id="loginForm" style="height: 630px;">
+    <div class="title">Система учета продаж</div>
+    <div style="text-align: left; margin-top: 20px;">
+        <a href="/Account/Login" class="returnLink">←</a>
+        <h1>Регистрация</h1>
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.TextBoxFor(m => m.UserName, new { @placeholder = "Имя", @style = "margin-left: 40px;" })
+        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "validationError" })
+        @Html.TextBoxFor(m => m.Email, new { @maxlength = "50", @type = "email", @placeholder = "Email", @style = "margin-left: 40px;" })
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "validationError" })
+        @Html.PasswordFor(m => m.EnteredPassword, new { @maxlength = "50", @placeholder = "Пароль", @style = "margin-left: 40px;" })
+        @Html.ValidationMessageFor(m => m.EnteredPassword, "", new { @class = "validationError" })
+        @Html.PasswordFor(m => m.EnteredPassword2, new { @maxlength = "50", @placeholder = "Повторите пароль", @style = "margin-left: 40px;" })
+        @Html.ValidationMessageFor(m => m.EnteredPassword2, "", new { @class = "validationError" })
+        <button name="btnSubmit" value="Save" class="blue" style="float: right;margin-top: 55px;margin-right: 45px;">Далее</button>
+    }
+</section>
+

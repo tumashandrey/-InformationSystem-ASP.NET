@@ -1,0 +1,11 @@
+﻿@model List<Kabinet.Models.DepartmentWithProducts>
+@{
+    Layout = null;
+}
+@if (Model.Any())
+{
+    foreach (var department in Model)
+    {
+        @Html.Partial("DepartmentInListPartial", department)        
+    }
+}

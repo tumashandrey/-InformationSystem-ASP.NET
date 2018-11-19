@@ -1,0 +1,120 @@
+﻿@using Kabinet.Models
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        @if (ViewBag.Title != null)
+        {
+            @ViewBag.Title
+        }
+        else
+        {
+            @Html.Raw("Система учета продаж")
+        }
+    </title>
+    @*@Styles.Render("~/Content/css")*@
+    <link href="/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="/Content/bootstrap.css" rel="stylesheet" />
+    <link href="/Content/site.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="shortcut icon" href="/favicon.png">
+</head>
+<body>
+@if (HttpContext.Current.Request.Url.AbsolutePath.StartsWith("/Products"))
+{
+    <div id="departmentForm" style="display: none;overflow-y: auto;" class="popupWindow"></div>
+    <div id="productForm" style="display: none;overflow-y: auto;" class="popupWindow"></div>
+}
+else if (HttpContext.Current.Request.Url.AbsolutePath.StartsWith("/Orders"))
+{
+    <div id="orderForm" style="display: none; overflow-y: auto;" class="popupWindow"></div>
+}
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbarTitle">Система учета продаж</div>
+    @Html.Partial("_LoginPartial")
+</div>
+<div class="menuLeft">
+    <br/>
+    @{
+        var cl1 = "navbar-brand";
+        var cl2 = "navbar-brand";
+        var cl3 = "navbar-brand";
+        if (HttpContext.Current.Request.Url.AbsolutePath.StartsWith("/Products"))
+        {
+            cl1 = cl1 + " active";
+        }
+        else if (HttpContext.Current.Request.Url.AbsolutePath.StartsWith("/Orders"))
+        {
+            cl2 = cl2 + " active";
+        }
+        else if (HttpContext.Current.Request.Url.AbsolutePath.StartsWith("/Users"))
+        {
+            cl3 = cl3 + " active";
+        }
+        <a href="/Products" class="@cl1">
+            <md-icon class="icon" md-svg-icon="local_mall" role="img" aria-hidden="true"><svg id="local_mall" viewBox="0 0 24 24" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false"><path d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-1.99.9-1.99 2L3 20c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm0 10c-2.76 0-5-2.24-5-5h2c0 1.66 1.34 3 3 3s3-1.34 3-3h2c0 2.76-2.24 5-5 5z"></path></svg></md-icon>
+            Товары
+        </a>
+        <a href="/Orders" class="@cl2">
+            <md-icon class="icon" md-svg-icon="device" role="img" aria-hidden="true"><svg id="device" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false"><path fill-rule="evenodd" d="M4.636 4C3.728 4 3 4.715 3 5.608v9.646c0 .884.728 1.607 1.636 1.607h2.87v4.05h8.985v-4.05h2.87c.9 0 1.63-.722 1.63-1.606l.007-9.646C20.997 4.715 20.26 4 19.36 4H4.637zM19.36 15.254H4.637V5.608H19.36v9.646z"></path></svg></md-icon>
+            Продажи
+        </a>
+        if (((CustomPrincipal) User).IsAdmin)
+        {
+            <a href="/Users" class="@cl3">
+                <md-icon class="icon" md-svg-icon="person" role="img" aria-hidden="true"><svg id="person" viewBox="0 0 24 24" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg></md-icon>
+                Пользователи
+            </a>
+        }
+    }
+</div>
+<div class="mainContainer">
+    @RenderBody()
+</div>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jquery-ui")
+@Scripts.Render("~/bundles/jquery-unobtrusive-ajax")
+@Scripts.Render("~/bundles/jquery-tablesorter")
+@Scripts.Render("~/bundles/jquery-tablesorter-pager")
+@Scripts.Render("~/bundles/jquery-tablesorter-widgets")
+@Scripts.Render("~/bundles/bootstrap")
+<script type="text/javascript">
+        $(".datepicker").datepicker(
+            {
+                closeText: 'Закрыть',
+                prevText: '< Раньше',
+                nextText: 'Позже >',
+                currentText: 'Сегодня',
+                monthNames: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+                monthNamesShort: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],
+                dayNames: ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'],
+                dayNamesShort: ['вск', 'пнд', 'втр', 'срд', 'чтв', 'птн', 'сбт'],
+                dayNamesMin: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
+                weekHeader: 'Не',
+                dateFormat: 'dd.mm.yy',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                clickInput: true
+            }
+        );
+        //$.tablesorter.addParser({
+        //    id: "eudate",
+        //    is: function(s) {
+        //        return false;
+        //    },
+        //    format: function(s, table) {
+        //        s = s.replace(/\-/g, "/");
+        //        s = s.replace(/(\d{1,2})[\/\.](\d{1,2})[\/\.](\d{4})/, "$3/$2/$1");
+        //        return $.tablesorter.formatFloat(new Date(s).getTime());
+        //    },
+        //    type: "numeric"
+        //});
+    </script>
+
+@RenderSection("scripts", required: false)
+</body>
+</html>

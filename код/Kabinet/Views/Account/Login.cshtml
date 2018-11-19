@@ -1,0 +1,28 @@
+﻿@using Kabinet.Models
+@model LoginModel
+@{
+    ViewBag.Title = "Вход в систему";
+    Layout = "/Views/Shared/_LayoutEmpty.cshtml";
+}
+<section id="loginForm">
+    <div class="title">Система учета продаж</div>
+    @using (Html.BeginForm("Login", "Account", new {ReturnUrl = ViewBag.ReturnUrl}, FormMethod.Post, new {@class = "form-horizontal", @role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.TextBoxFor(m => m.Login, new {@class = "form-control", @placeholder = "Логин", @readonly = "readonly", @onfocus= "this.removeAttribute('readonly')" })
+        @Html.ValidationMessageFor(m => m.Login, "", new {@class = "validationError" })
+        @Html.PasswordFor(m => m.Password, new {@class = "form-control", @placeholder = "Пароль", @readonly = "readonly", @onfocus = "this.removeAttribute('readonly')" })
+        @Html.ValidationMessageFor(m => m.Password, "", new {@class = "validationError" })
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br />
+        <button type="button" onclick="window.location='/Account/Register'" class="white">Регистрация</button>
+        <button value="Войти" class="blue">Войти</button>
+    }
+</section>
+@*@section Scripts {
+   @Scripts.Render("~/bundles/jqueryval")
+}*@

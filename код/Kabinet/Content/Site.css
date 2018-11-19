@@ -1,0 +1,1227 @@
+﻿html {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    height: 100%;
+    min-height: 100%;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    width: 100%;
+}
+body {
+    padding-top: 50px;
+    color: #242729;
+    font-size: 14px;
+    font-family: Arial;
+    height: 100%;
+    min-height: 100%;
+    width: 100%;
+}
+a {
+    text-decoration: underline;
+    color: #07C;
+}
+a:hover {
+    color: #3af;
+} 
+button {
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+    padding: 16px;
+    border: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: bold;
+}
+button.blue {
+    color: rgba(255,255,255,0.87);
+    background-color: rgb(0,188,212);
+}
+button.blue:hover {
+    background-color: rgb(0,172,193);
+}
+button.white {
+    background-color: white;
+    color: #00bcd4;
+    box-shadow: none;
+}
+button.white:hover {
+    background-color: rgba(158,158,158,0.2);
+}
+th {
+    text-align: center !important;
+    background-color: #eff0f1;
+    font-weight: normal;
+    font-size: 16px;
+}
+table tr:hover {
+    background-color: #eff0f1;
+}
+#mainTable, #mainTable th, #mainTable td  {
+    box-sizing: content-box;
+}
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.datepicker {
+    width: 80px;
+}
+.buttonnLikeLink {
+    background: transparent;
+    border: none;
+    text-decoration: underline;
+    color: #428bca;
+    cursor: pointer;
+    display: inline;
+}
+.validationError {
+    color: red;
+    position: absolute;
+    margin-top: 27px;
+}
+/* login form */
+#loginForm {
+    width: 500px;
+    height: 415px;
+    margin: auto;
+    box-shadow: 0 1px 5px 0 rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12);
+    background-color: white;
+    text-align: center;
+}
+#loginForm .title {
+    background-color: #00bcd4;
+    padding: 8px 16px;
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+   box-shadow: 0 1px 5px 0 rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12);
+}
+#loginForm .returnLink {
+    text-decoration: none;
+    color: black;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 25px;
+    margin-left: 50px;
+}
+#loginForm h1 {
+    display: inline-block;
+    font-weight: normal;
+}
+#loginForm input, #loginForm select, .mainContainer input, .mainContainer select {
+    display: block;
+    background-color: transparent;
+    border: none;
+    margin: auto;
+    margin-top: 50px;
+    width: 80%;
+    outline: none;
+    border-bottom: 1px solid  rgba(0,0,0,.12);
+    padding: 2px;
+    color: black;
+    transform: translate3d(0,28px,0) scale(1);
+    transition: transform .4s cubic-bezier(.25,.8,.25,1);
+    max-width: 100%;
+    -ms-transform-origin: left top;
+    transform-origin: left top;
+    font-size: 14px;
+}
+.mainContainer select {
+    margin-top: 0;
+}
+#loginForm input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgba(0,0,0,0.38);
+}
+
+#loginForm input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: rgba(0,0,0,0.38);
+}
+
+#loginForm input::-ms-input-placeholder { /* Microsoft Edge */
+    color: rgba(0,0,0,0.38);
+}
+#loginForm button {
+    width: 30%;
+}
+#loginForm button:first-of-type {
+    margin-right: 10px;
+}
+
+/* -----------------------------------------------   */
+
+.navbar-inverse, #filterActions {
+    width: 100%;
+    background-color: #00bcd4;
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
+    color: white;
+}
+.navbar-inverse {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1030;
+    
+    height: 60px;
+    box-sizing: border-box;
+    border-bottom: none;
+}
+.navbarTitle {
+    padding: 8px 16px;
+    color: white;
+    font-size: 33px;
+    font-weight: bold;
+    display: inline-block;
+}
+.menuLeft {
+    position: fixed;
+    display: -ms-flexbox;
+    display: flex;
+    transform: translate3d(0,0,0);
+    flex-direction: column;
+    background-color: #fafafa;
+    width: 240px;
+    box-shadow: 0 8px 10px -5px rgba(0,0,0,.2), 0 16px 24px 2px rgba(0,0,0,.14), 0 6px 30px 5px rgba(0,0,0,.12);
+    height: 100%;
+    min-height: 100%;
+    z-index: 2;
+    overflow-y: auto;
+}
+.mainContainer {
+    position: relative;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -ms-flex-negative: 1;
+    flex-shrink: 1;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: rgb(250,250,250);
+    height: 100%;
+    min-height: 100%;
+    left: 0;
+    width: 100%;
+    color: rgba(0,0,0,.54);
+    text-align: left;
+    z-index: 1;
+    padding-left: 240px;
+}
+.mainContainer .header {
+    padding: 15px;
+    background-color: #e9e9e9;
+    border-bottom: 1px solid #bdbdbd;
+    height: 125px;
+    width: 100%;
+    padding-left: 30px;
+}
+.mainContainer .header .pageSelector {
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 10px 20px;
+    margin-top: 4px;
+}
+.mainContainer .header .pageSelector.active {
+    color: rgb(0,188,212);
+    border-bottom: 2px solid rgb(0,188,212);
+    cursor: default; 
+}
+.mainContainer .page {
+   padding-left: 30px;
+   display: none;
+}
+.mainContainer h1 {
+    font-size: 30px;
+    font-weight: bold;
+}
+.mainContainer h2 {
+    font-size: 19px;
+    font-weight: bold;
+    color: rgba(0,0,0,.87);
+}
+.mainContainer input, .mainContainer select {
+    margin-left: 0;
+    width: 380px;
+}
+.navbar-brand, .pageLink {
+    padding-right: 50px;
+    display: inline-block;
+    padding: 0 12px;
+    color: #535a60 !important;
+    line-height: 58px;
+    text-decoration: none;
+    height: 57px;
+    position: relative;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color cubic-bezier(.165, .84, .44, 1) .25s,border-bottom-color ease-in-out .25s;
+    margin-left: 0 !important;
+    vertical-align: middle;
+}
+.navbar-brand:hover {
+    background-color: rgba(158,158,158,0.2);
+    color: #242729 !important;
+    text-decoration: none;
+    outline: none; 
+}
+.navbar-brand.active {
+    color: #00bcd6 !important;
+}
+.logoutLink {
+    color: white;
+    text-decoration: none;
+    padding: 5px 15px !important;
+    margin-top: 15px;
+    font-weight: bold;
+    display: inline-block;
+    margin-right: 20px;
+    vertical-align: middle;
+}
+.logoutLink:hover {
+    color: white;
+    background-color: rgba(158, 158, 158, 0.2);
+    text-decoration: none;
+}
+.logoutLink .icon, .menuLeft .icon {
+    display: inline-block;
+    -ms-flex-align: center;
+    justify-content: center;
+    border-radius: 100%;
+    overflow: hidden;
+    border: 2px solid rgba(255,255,255,.7);
+    background-color: rgba(255,255,255,.7);
+    background-clip: padding-box;
+    height: 24px;
+    width: 24px;
+    min-height: 24px;
+    min-width: 24px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+.menuLeft .icon {
+    background-color: transparent;
+    border: none;
+    margin-right: 15px;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+md-icon {
+    background-repeat: no-repeat no-repeat;
+    fill: currentColor;
+    height: 24px;
+    width: 24px;
+    min-height: 24px;
+    min-width: 24px;
+    color: inherit;
+    margin: auto;
+}
+md-icon svg {
+    fill: inherit;
+}
+md-icon svg {
+    pointer-events: none;
+    display: block;
+}
+
+.panelsContainer {
+    position:relative;
+    width: 100%;
+    padding: 8px; 
+}
+.leftPanel, .rightPanel, .mainPanel {
+    height: 100%;
+    vertical-align: top;
+}
+.leftPanel, .rightPanel {
+    width: 300px;
+    padding: 15px;
+} 
+.leftPanel {
+    float: left;
+}
+.rightPanel {
+    float: right;
+}
+.leftPanel b, .rightPanel b {
+    font-weight: normal;
+    font-size: 14px;
+}
+.leftPanel .subPanel, .rightPanel .subPanel {
+    max-height: 260px;
+    overflow-y: auto;
+    overflow-x: auto;
+    margin-bottom: 5px;
+    border: 1px solid #e4e6e8;
+    background-color: #f9fbfd;
+    padding: 7px;
+}
+.mainPanel {
+    overflow: hidden;
+}
+#filterActions {
+    z-index: 10000;
+    padding: 10px;
+        padding-top: 15px;
+    display: none;
+    padding-bottom: 0;
+}
+#filterActions button {
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: .61538462em 1em;
+    box-sizing: border-box;
+    font-weight: 400;
+    line-height: 1;
+    touch-action: manipulation;
+    transition: all .1s ease-in;
+    outline: none;
+    border-radius: 2px;
+    width: 200px;
+    margin-right: 10px;
+}
+#filterActions #btnApplyFilter {
+    color: #FFF;
+    background-color: #0095ff;
+    border-color: #07c;
+    box-shadow: inset 0 1px 0 #66bfff;
+    border-radius: 2px;
+    border: 1px solid transparent;
+    font-size: 18px;
+}
+#filterActions #btnApplyFilter:hover {
+    color: rgba(255,255,255,0.9);
+    background-color: #07c;
+    border-color: #005999;
+    box-shadow: inset 0 1px 0 #3af;
+}
+#filterActions #btnClearFilter, #filterActions #btnSaveFilter {
+    border: 1px solid transparent;
+    color: #07c;
+    background-color: white;
+    border-color: #0095ff;
+    box-shadow: none;
+    font-size: 15px;
+}
+#filterActions #btnClearFilter:hover, #filterActions #btnSaveFilter:hover {
+    color: #005999;
+    background-color: #e6f4ff;
+    border-color: #07c;
+    box-shadow: none;
+}
+#filterActions #FilterNameToSave {
+    display: inline-block;
+    width: 200px;
+}
+.taskList {
+    margin-top: 43px;
+    width: 100%;
+    font-size: 12px;
+}
+.taskList th {
+    font-size: 12px;
+}
+.taskList th, .taskList td, .pageInfo table th, .pageInfo table td {
+    padding: 5px;
+    border: 1px solid #e4e6e8;    
+}
+.taskList a, .taskList span {
+    max-height: 48px;
+    max-width: 150px;
+    overflow: hidden;
+    display: inline-block;
+}
+.taskList .taskActionButtons {
+    text-align: center;
+}
+.taskList .taskActionButtons button, .pageInfo .actionButtons button {
+    background: transparent;
+    width: 20px;
+    height: 20px;
+    background-size: 100% 100%;
+    border: 0;
+    margin: 4px;
+}
+.pageInfo .actionButtons {
+    text-align: center;
+}
+.pageInfo .actionButtons button {
+    width: 12px;
+    height: 12px;  
+    margin: 0;
+}
+.taskList .taskActionButtons .Delay {
+    background-image: url('/Content/Images/Delay.png');
+}
+.taskList .taskActionButtons .SetIsDoneForSoftware {
+    background-image: url('/Content/Images/IsDone.png');
+}
+.taskList .taskActionButtons .SetChecked {
+    background-image: url('/Content/Images/Checked.png');
+}
+.taskList .taskActionButtons .SetCheckedByAuthor {
+    background-image: url('/Content/Images/CheckedByAuthor.png');
+}
+.taskList .taskActionButtons .SetClosed {
+    background-image: url('/Content/Images/Closed.png');
+}
+.taskList .taskActionButtons .SetReopened {
+    background-image: url('/Content/Images/Reopened.png');
+}
+.taskList .taskActionButtons .IncludeActiveSprint {
+    background-image: url('/Content/Images/Sprint.png');
+}
+.taskList .taskActionButtons .Direct {
+    background-image: url('/Content/Images/Direct.png');
+}
+.taskList .taskActionButtons .IncludeNextSprint {
+    background-image: url('/Content/Images/SprintNext.png');
+}
+.taskList .taskActionButtons .SetRequired {
+    background-image: url('/Content/Images/Required.png');
+}
+.taskList .taskActionButtons .SetActive {
+    background-image: url('/Content/Images/Activate.png');
+}
+.taskList .taskActionButtons .SetCodeReview {
+    background-image: url('/Content/Images/Review.png');
+}
+.pageInfo .actionButtons .delete {
+    background-image: url('/Content/Images/Delete.png');
+}
+.pageInfo .actionButtons .delete.black {
+    background-image: url('/Content/Images/Delete_black.png');
+}
+.pageInfo .actionButtons .edit {
+    background-image: url('/Content/Images/Edit.png');
+}
+.subPanel hr {
+    margin: 10px auto;
+}
+.subPanel .selectableItem {
+    height: 16px;
+    width: auto;
+    white-space: nowrap;
+}
+.subPanel .selectableItem input[type='checkbox'] {
+    display: inline-block;
+    margin-top: 0;
+}
+.subPanel .selectableItem label {
+    font-weight: normal;
+    display: inline-block;
+    white-space: nowrap;
+    margin: 0;
+}
+.subPanel .selectableItem, .subPanel .selectableItem input {
+    vertical-align: middle;    
+}
+.selectableItem .delete {
+    background-color: transparent;
+    background-image: url('/Content/Images/Delete.png');
+    background-size: 100%;
+    width: 12px;
+    height: 12px;
+    margin: 0;
+    transition: none;
+    border: 0;
+    padding: 0;
+    border-radius: 0;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+.selectableItem .delete:hover {
+    transition: none;
+    background-color: transparent;
+    background-image: url('/Content/Images/Delete.png');
+}
+.subPanel .searchString {
+    width: 100%;
+}
+.pagination .pageButton {
+    display: inline-block;
+    padding: 4px 8px;
+    font-size: 12px;
+    color: #848d95;
+    border: 1px solid #e4e6e8;
+    background-color: transparent;
+}
+.pagination .pageButton, .pagination .pageButton:hover {
+    text-decoration: none;
+    transition: all .15s ease-in-out;
+}
+.pagination .pageButton:hover {
+    color: #FFF;
+    background-color: #f69c55;
+    border-color: transparent;
+}
+.pagination .pageButton.active {
+    color: #FFF;
+    background-color: #f69c55;
+    border-color: transparent;
+    cursor: default;
+}
+.taskViewContainer {
+    width: 100%;
+    height: 100%;
+    padding: 50px;
+}
+.taskViewContainer .returnUrl {
+    text-decoration: none;
+    font-weight: bold;
+}
+.viewTaskTable {
+    width: 70%;
+    margin: auto;
+    padding: 20px 0;
+    margin-bottom: 0;
+    font-size: 15px;
+}
+.viewTaskTable.edit input, .viewTaskTable.edit select, .viewTaskTable.edit textarea {
+    width: 280px;
+    max-width: 280px;
+}
+.viewTaskTable tr:hover {
+    background-color: transparent;
+}
+.viewTaskTable td {
+    padding: 10px 0;
+}
+.taskViewContainer .pageLinksContainer, .taskViewContainer .buttonsContainer, .pagination {
+    width: 100%;
+    text-align: center;
+}
+.pageLink {
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    margin: auto;
+    color: #848d95 !important;
+}
+.pageLink:hover {
+    background-color: rgba(132,141,149,0.05);
+}
+.pageLink.active {
+    border-top: 2px solid #F48024;
+    border-left: 1px solid #e4e6e8;
+    border-right: 1px solid #e4e6e8;
+    border-bottom: 1px solid white;
+    color: #0C0D0E !important;
+}
+.pageLink.active:hover {
+    background-color: white !important;
+}
+.pageInfo {
+    display: none;
+    border: 1px solid #e4e6e8;
+    margin-top: -3px;
+    min-height: 100px;
+    padding: 20px;
+}
+.pageInfoLabel {
+    font-size: 16px;
+    display: none;
+    margin-bottom: 15px;
+}
+.pageInfo table th {
+    font-size: 14px;
+}
+.pageInfo table th, .pageInfo table td {
+    padding: 5px 15px;
+}
+.addItems {
+    margin-top: 30px;
+}
+.addItems input, .addItems select {
+    margin-right: 10px;
+    max-width: 50%;
+}
+#page1 table td {
+    width: 33%;
+}
+.taskViewContainer .buttonsContainer {
+    padding: 30px 0;
+}
+.taskViewContainer .buttonsContainer button, .subPanel button, .pageInfo .addItems button, .popupWindowDialog button, .svnAddComment button, .userSettings .addButton, .grayButton {
+    color: #474d53;
+    background-color: #d6d9dc;
+    border-color: #c8ccd0;
+    transition: background-color .15s ease-in-out,border .15s ease-in-out,color .15s ease-in-out;
+    padding: .2em .7em;
+    margin: 0 3px 3px 0;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: #eff0f1;
+    border-color: #d6d9dc;
+    text-align: center;
+}
+.taskViewContainer .buttonsContainer button:hover, .subPanel button:hover, .pageInfo .addItems button:hover, .popupWindowDialog button:hover, .svnAddComment button:hover, .userSettings .addButton:hover {
+    color: #474d53;
+    background-color: #d6d9dc;
+    border-color: #c8ccd0;
+}
+.validation-summary-errors {
+   color: red; 
+}
+.validation-summary-errors ul li {
+    text-align: left;
+}
+.validationSummaryContainer {
+    text-align: center;
+}
+.validation-summary-errors {
+    margin: auto;
+    display: inline-block;
+}
+.addItems table td {
+    border: 0;
+}
+.addItems table input, .addItems table select, .addItems table textarea,
+.popupWindowDialog table input, .popupWindowDialog table select, .popupWindowDialog table textarea {
+    max-width: none;
+    width: 100%;
+}
+.evenRowTable tr:nth-child(even) {
+    background: #eff0f1;
+}
+.popupWindowDialog table input, .popupWindowDialog table select, .popupWindowDialog table textarea {
+    padding-left: 3px;
+}
+.svnFileLabel {
+    margin: 20px 0;
+}
+.svnFileLabel:first-of-type {
+    margin-top: 30px;
+}
+.svnChanges {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    border: 1px solid #e4e6e8;
+    border-radius: 3px;
+}
+.svnChanges .line {
+    width: 100%;
+    border: 0;
+    border-radius: 0;
+    margin: 0;
+    background-color: #fff;
+    padding: 3px;
+    cursor: pointer;
+    height: 24px;
+    overflow-x: hidden;
+}
+.svnChanges .line.green {
+    background-color: #ecfdf0;
+}
+.svnChanges .line.red {
+    background-color: #fbe9eb;
+}
+.svnChanges .line.gray {
+    color: rgba(0,0,0,0.3);
+    background-color: #fafafa;
+}
+.svnChanges .line.lineComment {
+    color: rgba(0,0,0,0.3);
+    background-color: #fafafa;
+}
+.svnChanges .comments {
+    position: absolute;
+    right: 15px;
+    cursor: pointer;
+    margin: 0;
+    margin-top: -20px;
+}
+.svnAddComment {
+    border: 1px solid #e4e6e8;
+    border-radius: 3px;
+    padding: 10px;
+    background-color: #fafafa;
+}
+.svnAddComment textarea {
+    width: 100%;
+    max-width: none;
+    height: 70px;
+    margin-bottom: 10px;
+    border: 1px solid #e4e6e8;
+}
+.svnAddComment button {
+    margin-bottom: 0;
+}
+.svnComments {
+    border: 1px solid #e4e6e8;
+    border-radius: 3px;
+    padding: 10px;
+    background-color: #fafafa;
+}
+.svnComments .fio {
+    font-weight: bold;
+}
+.svnComments .date {
+    font-weight: normal;
+    color: rgba(0,0,0,0.3);
+    margin-left: 10px;
+}
+#LineCommentsForm .popupWindowDialog {
+    background-color: transparent;
+}
+.userSettings {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+.userSettings b {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+.userSettings table {
+    margin-bottom: 10px;
+}
+.userSettings table .delete {
+    background-size: 100%;
+    width: 12px;
+    height: 12px;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    border-radius: 0;
+    vertical-align: middle;
+    margin-left: 5px;
+    transition: none;
+    background-color: transparent;
+    background-image: url(/Content/Images/Delete.png);
+}
+.tablesorter-headerAsc, .tablesorter-headerDesc {
+    font-weight: bold;
+}
+.deskTable td {
+    vertical-align: top !important;
+}
+.deskTable tr:hover {
+    background-color: initial !important;
+}
+.deskItem {
+    display: inline-block;
+    padding: 5px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin: 3px;
+    max-width: 100px;
+    max-height: 60px;
+    overflow: hidden;
+}
+.deskItem a {
+    max-height: none !important;
+    padding: 0 !important;
+    display: inline !important;
+    color: white;
+}
+.deskItemContextMenu {
+    display: none;
+    position: absolute;
+    z-index: 100;
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+/* popup */
+.popupWindow {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1031;
+    display: none;
+}
+.popupWindowBg {
+    height: 100%;
+    width: 100%;
+    opacity: 0.48;
+    background-color: rgba(33,33,33,1.0);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1031;
+}
+.popupWindowContent {
+    border-radius: 4px;
+    margin: auto;
+    background-color: white;
+    position: relative;
+    width: 50%;
+    min-width: 500px;
+    top: 100px;
+    z-index: 1032;
+    padding: 40px;
+    padding-bottom: 85px;
+    box-shadow: 0 7px 8px -4px rgba(0,0,0,.2), 0 13px 19px 2px rgba(0,0,0,.14), 0 5px 24px 4px rgba(0,0,0,.12);
+}
+.popupWindowContent h3 {
+    margin-top: 0;
+}
+.popupWindowContent .registrationCode {
+    font-size: 60px;
+    margin-top: 30px;
+}
+.popupWindowContent .registrationCode .number {
+    border-radius: 4px;
+    border: solid 1px rgba(0,0,0,.12);
+    display: inline-block;
+    padding: 0 10px;
+}
+.popupWindowContent input[type='text'], .popupWindowContent select, .popupWindowContent input[type='number'] {
+    display: block;
+    width: 100%;
+    max-width: none;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+.popupWindowContent button {
+    float: right;
+}
+.popupWindowContent button:last-of-type {
+    margin-right: 10px;
+}
+.popupWindowContent .field-validation-error {
+    color: red;
+    display: block;
+    position: absolute;
+    margin-top: -20px;
+}
+.input-validation-error {
+    border: 1px solid red !important;
+}
+.searchString__svg-icon {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    margin-left: 20px;
+    margin-top: 24px;
+}
+.searchString {
+    margin-top: 15px !important;
+    background: white !important;
+    padding: 10px 10px 10px 60px !important;
+    transform: none !important;
+    width: 700px !important;
+    display: inline-block !important;
+}
+.sortBy__svg-icon {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    top: 5px;
+    margin-left: 15px;
+    position: relative;
+}
+.sortByItems {
+    width: auto !important;
+    display: inline-block !important;
+    padding: 10px !important;
+    padding-left: 0 !important;
+    transform: none !important;
+    border-bottom: none !important;
+}
+.addProduct, .addDepartment {
+   text-align: center;
+    vertical-align: middle; 
+    cursor: pointer;
+    color: rgba(255,255,255,0.87);
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    margin-left: 20px;
+}
+.addProduct {
+    width: 56px;
+    height: 56px;
+    background-color: rgb(0,188,212);
+    line-height: 56px;
+    margin-top: 45px;
+}
+.addDepartment {
+    width: 56px;
+    height: 56px;
+    background-color: rgb(33,150,243);
+    line-height: 56px;
+    margin-top: 110px;
+}
+.addProduct md-icon svg, .addDepartment md-icon svg {
+    width: 24px;
+    height: 24px;
+     vertical-align: middle;
+    display: inline;
+}
+.product-name {
+    display: inline-block;
+    width: 50%;
+    cursor: pointer;
+}
+.product-delete {
+    float: right;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    padding: 10px 20px;
+    opacity: 0.5;
+}
+.product-delete svg {
+    width: 20px;
+    height: 20px;
+}
+.product-photo-icon, .product-photo-icon svg {
+    width: 20px;
+    height: 20px;
+    color: rgba(255,255,255,.7);
+    z-index: 2;
+    position: relative;
+    opacity: 0.7;
+}
+.product-photo {
+    background-color: #00bcd4;
+    padding: 20px 40px 10px 40px;
+    color: rgba(255,255,255,.7);
+    display: block;
+    position: relative;
+}
+.product-photo img {
+    width: 100%;
+    z-index: 1;
+    position: absolute;
+    overflow: hidden;
+    display: block;
+    top: 0;
+    left: 0;
+    height: 100%;
+}
+.product-photo h3 {
+    position: relative;
+}
+.product-photo input[type='text'], .product-photo select {
+    color: #242729;
+    position: relative;
+    z-index: 2;
+}
+.product-photo-icon {
+    float: right;
+    cursor: pointer;
+}
+.product-info {
+    padding: 30px 40px 75px 40px;
+    position: relative;
+    z-index: 2;
+    background-color: white;
+}
+.lblProductType {
+    font-weight: normal;
+    margin-right: 20px;
+    margin-bottom: 0;
+}
+#productsList {
+    padding-bottom: 30px;
+}
+#productsList h3 {
+    padding-left: 80px;    
+    font-size: 20px;
+    color: rgba(0,0,0,.54);
+}
+.department, .department__open {
+    width: 80%;
+}
+.department {
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12), 0 3px 1px -2px rgba(0,0,0,.2);
+    margin-top: 8px;
+    background-color: #fff;
+    border-radius: 2px;
+    margin-left: 30px;
+}
+.department-menu__opener {
+    cursor: pointer;
+    display: inline-block;
+    margin-top: -30px;
+    position: relative;
+    float: right;
+    margin-right: -30px;
+}
+.department-menu__opener svg {
+    width: 20px;
+    height: 20px;
+    color: rgba(0,0,0,.54);
+}
+.department-menu {
+    box-shadow: 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12), 0 2px 4px -1px rgba(0,0,0,.4);
+    background: #fff;
+    display: inline-block;
+    position: relative;
+    float: right;
+    margin-right: -30px;
+    display: none;
+    z-index: 2;
+}
+.department-menu__item {
+    cursor: pointer;
+    color: rgba(0,0,0,.87);
+    padding: 10px 20px;
+}
+.department-menu__item:hover {
+    background: rgba(0, 0, 0, .12);
+}
+.department.empty {
+    background-color: #cfd8dc;
+    height: 150px;
+    vertical-align: middle;
+    line-height: 150px;
+}
+.department-empty__icon {
+    border-radius: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,.24), 0 0 4px 0 rgba(0,0,0,.12);
+    width: 84px;
+    height: 84px;
+    background-size: 48px;
+    background-image: url('/Content/images/department_empty.svg');
+    background-color: #fff;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+.department-empty__info {
+    display: inline-block;
+    vertical-align: middle;
+}
+.department.empty h3, .department.empty p {
+    padding: 0 !important;
+    height: auto !important;
+    line-height: initial;
+    margin-top: 0 !important;
+}
+.department .product {
+    color: rgba(0,0,0,.54);
+    transition: color .15s ease-out;
+    background-color: rgb(250,250,250);
+    padding: 10px !important;
+    border-bottom: 1px solid #cfd8dc;
+    font-size: 18px;
+}
+.productIcon {
+    border-radius: 50%;
+    background-color: #eee;
+    color: rgba(0,0,0,.38);
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    margin-right: 10px;
+    line-height: 40px;
+}
+.productIcon.department {
+    position: absolute;
+    margin-top: -14px;
+}
+.productIcon img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.department .product .productPrice {
+    float: right;
+    margin-top: 10px;
+    font-weight: normal;
+}
+.department__open {
+    color: #00bcd4;
+    cursor: pointer;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12), 0 3px 1px -2px rgba(0,0,0,.2);
+    background-color: #fff;
+    border-radius: 2px;
+    margin-left: 30px;
+    padding: 10px 20px;
+    font-weight: bold;
+    z-index: 2;
+}
+.department__open:hover {
+    background: rgba(0, 188, 212, .12);
+}
+.sc-page {
+    padding: 20px 0;
+}
+.sc-page input, .sc-page select {
+    margin: 0;
+    transform: none;
+    background: #fff;
+    border-width: 1px;
+    border-radius: 0;
+    border-style: inset;
+    border-color: rgba(0,0,0,0.38);
+}
+.sc-page .btn-default {
+        box-shadow: rgba(0, 0, 0, 0.26) 0px 2px 5px 0px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 16px;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+        color: rgba(255, 255, 255, 0.87);
+    background-color: rgb(0, 188, 212);
+    width: auto;
+}
+.sc-page .btn-default:hover {
+    background-color: rgb(0,172,193);
+}
+.sc-page h4 {
+    font-weight: bold;
+    margin-left: 280px;
+    font-size: 30px;
+}
+.sc-page .checkbox input[type='checkbox'] {
+    width: auto;
+    margin-left: 0;
+}
+@media (max-width: 1210px) {
+    .searchString {
+        width: 500px !important;
+    }
+}
+@media (max-width: 1110px) {
+    .searchString {
+        width: 300px !important;
+    }
+}
+@media (max-width: 1000px) {
+    .menuLeft {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: auto;
+        min-height: fit-content;
+    }
+    .mainContainer {
+        padding-left: 0;
+    }
+}

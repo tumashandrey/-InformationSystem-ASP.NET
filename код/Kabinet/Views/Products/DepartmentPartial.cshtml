@@ -1,0 +1,25 @@
+﻿@model Kabinet.Models.ProductGroups
+@{
+    Layout = null;
+}
+<div class="popupWindowBg" onclick="CloseDepartmentForm();"></div>
+<div class="popupWindowContent" style="padding: 0;">
+    @using (Ajax.BeginForm("SaveDepartment", null, new AjaxOptions {UpdateTargetId = "departmentForm"}, new {@id = "frmDepartment"}))
+    {
+        @Html.HiddenFor(m => m.ID)
+        <div class="product-photo">
+            <div class="product-photo-icon">
+                <svg role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="md-icon md-text--inherit"><defs><path d="M24 24H0V0h24v24z" id="a"></path></defs><clipPath id="b"><use overflow="visible" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#a"></use></clipPath><path d="M3 4V1h2v3h3v2H5v3H3V6H0V4h3zm3 6V7h3V4h7l1.83 2H21c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V10h3zm7 9c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-3.2-5c0 1.77 1.43 3.2 3.2 3.2s3.2-1.43 3.2-3.2-1.43-3.2-3.2-3.2-3.2 1.43-3.2 3.2z"></path></svg>
+            </div>
+
+            <h3>Группа</h3>
+            @Html.TextBoxFor(m => m.Name, new { @placeholder = "Название группы", @title = "Название группы" })
+            @Html.ValidationMessageFor(m => m.Name)
+            @Html.DropDownListFor(m => m.ParentID, Model.ParentsList, new { })
+        </div>
+        <div class="product-info">
+            <button type="button" onclick="$('#frmDepartment').submit(); " class="blue">Сохранить</button>
+            <button type="button" onclick="CloseDepartmentForm(); " class="white">Отмена</button>
+        </div>
+    }
+</div>

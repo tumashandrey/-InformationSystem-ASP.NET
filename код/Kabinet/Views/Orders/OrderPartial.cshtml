@@ -1,0 +1,39 @@
+﻿@using Kabinet.Models
+@model Kabinet.Models.Orders
+@{
+    Layout = null;
+}
+<div class="popupWindowBg" onclick="CloseOrderForm();"></div>
+<div class="popupWindowContent" style="padding: 0;">
+    @using (Ajax.BeginForm("SaveOrder", null, new AjaxOptions {UpdateTargetId = "orderForm"}, new {@id = "frmOrder"}))
+    {
+        @Html.HiddenFor(m => m.ID)
+        <div class="product-photo">
+            <h3>Продажа</h3>
+            @Html.DropDownListFor(m => m.ProductID, new SelectList(Model.ProductsList, "Value", "Text"), new {})
+            @Html.ValidationMessageFor(m => m.ProductID)
+            @Html.DropDownListFor(m => m.UserID, new SelectList(Model.UsersList, "Value", "Text"), new {})
+            @Html.ValidationMessageFor(m => m.UserID)
+            @*@Html.TextBoxFor(model => model.CreatedDate, Model?.CreatedDate.ToString("dd.MM.yyyy") ?? string.Empty, new {@class = "datepicker", @readonly = "true"})*@
+            @Html.HiddenFor(m => m.CreatedDate)
+        </div>
+        <div class="product-info">
+            @Html.TextBoxFor(m => m.Price, new {@placeholder = "Цена", @title = "Цена"})
+            @Html.ValidationMessageFor(m => m.Price)
+            @Html.TextBoxFor(m => m.Quantity, new {@placeholder = "Количество", @title = "Количество", @type = "number"})
+            @Html.ValidationMessageFor(m => m.Quantity)
+            @Html.TextBoxFor(m => m.Summ, new {@placeholder = "Сумма", @title = "Сумма"})
+            @Html.ValidationMessageFor(m => m.Price)
+            @Html.TextBoxFor(m => m.Comments, new {@placeholder = "Комментарии", @title = "Комментарии"})
+            @Html.ValidationMessageFor(m => m.Comments)
+            @Html.CheckBoxFor(m => m.IsPayed)
+            <label for="IsPayed">Оплачена</label>
+            <br/>
+            <br/>
+            @*@Html.TextBoxFor(model => model.PatedDate, Model?.PatedDate?.ToString("dd.MM.yyyy") ?? string.Empty, new {@class = "datepicker", @readonly = "true"})*@
+            <button type="button" onclick="$('#frmOrder').submit(); " class="blue">Сохранить</button>
+            <button type="button" onclick="CloseOrderForm(); " class="white">Отмена</button>
+        </div>
+    }
+</div>
+}

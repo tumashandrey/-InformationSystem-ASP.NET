@@ -1,0 +1,85 @@
+﻿@model Kabinet.Models.DepartmentWithProducts
+@{
+    var dStyle = "";
+    if (Model.Level > 0)
+    {
+        dStyle = "margin-left: " + Model.Level*20 + "px;";
+    }
+    <div style="@dStyle">
+        <div style="width: 80%;">
+            @if (Model.Photo == null)
+            {
+                <div class="productIcon department" onclick="ShowDepartment(@Model.DepartmentID) ">@Model.ShortName</div>
+            }
+            else
+            {
+                <div class="productIcon department" onclick="ShowDepartment(@Model.DepartmentID) ">
+                    <img src="data:image/jpeg;base64,@System.Convert.ToBase64String(Model.Photo)" title="@Model.DepartmentName" />
+                </div>
+            }
+            <h3 style="font-weight: bold; cursor: pointer;" onclick="ToggleDepartmentProducts(@Model.DepartmentID)">@Model.DepartmentName</h3>
+            @if (Model.DepartmentID != 0)
+            {
+
+                @*<div class="department-menu__item" onclick="ShowDepartment(@Model.DepartmentID); ">Изменить НДС у товаров</div>
+                <div class="department-menu__item" onclick="">Переместить товары</div>
+                <div class="department-menu__item" onclick="DeleteProductsFromDepartment(@Model.DepartmentID); ">Удалить товары</div>*@
+
+                <div id="departmentMenuOpener_@Model.DepartmentID" class="department-menu__opener" onclick="ToggleDepartmentMenu(@Model.DepartmentID) ">
+                    <svg role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="md-icon"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path></svg>
+                </div>
+                <div id="departmentMenu_@Model.DepartmentID" class="department-menu">
+                    <div class="department-menu__item" onclick="ShowDepartment(@Model.DepartmentID); ">Изменить группу</div>
+                    @if ((!Model.Products.Any()) && (Model.Childs == null))
+                {
+                        <div class="department-menu__item" onclick="DeleteDepartment(@Model.DepartmentID); ">Удалить группу</div>
+                    }
+                </div>
+            }
+        </div>
+        @if ((Model.Products.Any()) || (Model.Childs != null))
+        {
+            <div class="department">
+                @foreach (var product in Model.Products)
+                {
+                    <div style="" class="product productInDepartment_@Model.DepartmentID" data-item="@product.Name.ToLower()">
+                        @if (product.Photo == null)
+                        {
+                            <div class="productIcon" onclick="ShowProduct(@product.ID) " >@product.ShortName</div>
+                        }
+                        else
+                        {
+                            <div class="productIcon" onclick="ShowProduct(@product.ID) " >
+                                <img src="data:image/jpeg;base64,@System.Convert.ToBase64String(product.Photo)" title="@product.Name" />
+                            </div>
+                        }
+                        <div class="product-name" onclick="ShowProduct(@product.ID) ">@product.Name</div>
+                        <div class="product-delete" onclick="DeleteProduct(@product.ID); " title="Удалить товар">
+                            <svg role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="md-icon"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path></svg>
+                        </div>
+                        <label class="productPrice">@product.Price</label>
+                    </div>
+                }
+            </div>
+            <div class="department__open" onclick="NewProductToDepartment(@Model.DepartmentID);">ДОБАВИТЬ ТОВАР</div>
+        }
+        else
+        {
+            <div class="department empty">
+                <div class="department-empty__icon"></div>
+                <div class="department-empty__info">
+                    <h3>Группа пустая</h3>
+                    <p>Добавьте товары в группу или переместите их из других групп</p>
+                </div>
+            </div>
+            <div class="department__open" onclick="NewProductToDepartment(@Model.DepartmentID);">ДОБАВИТЬ ТОВАР</div>
+        }
+        @if ((Model.Childs != null) && (Model.Childs.Any()))
+        {
+            foreach (var item in Model.Childs)
+            {
+                @Html.Partial("DepartmentInListPartial", item)
+            }
+        }
+    </div>
+}

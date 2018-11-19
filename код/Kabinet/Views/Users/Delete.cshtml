@@ -1,0 +1,21 @@
+﻿@model Kabinet.Models.Users
+
+@{
+    ViewBag.Title = "Удаление";
+}
+<div class="sc-page">
+    <div>
+        <h4>Вы действительно хотите удалить эту запись?</h4>
+        <hr />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button style="display: inline-block;margin-right: 10px;margin-left: 175px;" type="button" class="white" onclick="window.location='/Users'">Отмена</button>
+                    <input style="display: inline-block;" type="submit" value="Удалить" class="btn btn-default" />
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,55 @@
+﻿@model Kabinet.Models.Products
+@{
+    Layout = null;
+}
+<div class="popupWindowBg" onclick="CloseProductForm();"></div>
+<div class="popupWindowContent" style="padding: 0;">
+    @using (Ajax.BeginForm("SaveProduct", null, new AjaxOptions { UpdateTargetId = "productForm" }, new { @id = "frmProduct" }))
+    {
+        @Html.HiddenFor(m => m.ID)
+        @Html.HiddenFor(m => m.Photo)
+        @Html.HiddenFor(m => m.PhotoUploaded)
+        <input type="file" id="PhotoUploadedFile" value="upload" name="PhotoUploadedFile" accept="image/jpeg,image/png" onchange="UploadImage(this) " style="display: none" />
+        <div class="product-photo">
+            @if (Model.Photo != null)
+            {
+                <img id="imgPhoto" src="data:image/jpeg;base64,@System.Convert.ToBase64String(Model.Photo)"/>
+            }
+            else
+            {
+                <img id="imgPhoto" style="display: none;"/>
+            }
+            <div class="product-photo-icon" onclick="document.getElementById('PhotoUploadedFile').click();">
+                <svg role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="md-icon md-text--inherit"><defs><path d="M24 24H0V0h24v24z" id="a"></path></defs><clipPath id="b"><use overflow="visible" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#a"></use></clipPath><path d="M3 4V1h2v3h3v2H5v3H3V6H0V4h3zm3 6V7h3V4h7l1.83 2H21c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V10h3zm7 9c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-3.2-5c0 1.77 1.43 3.2 3.2 3.2s3.2-1.43 3.2-3.2-1.43-3.2-3.2-3.2-3.2 1.43-3.2 3.2z"></path></svg>
+            </div>
+            <h3>Товар</h3>
+            @Html.TextBoxFor(m => m.Code, new {@placeholder = "Штрихкод", @title = "Штрихкод"})
+            @Html.ValidationMessageFor(m => m.Code)
+            @Html.TextBoxFor(m => m.Name, new {@placeholder = "Название товара", @title = "Название товара"})
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+        <div class="product-info">
+            @Html.TextBoxFor(m => m.Price, new { @placeholder = "Цена", @title = "Цена" })
+            @Html.ValidationMessageFor(m => m.Price)
+            @Html.TextBoxFor(m => m.VendorCode, new { @placeholder = "Артикул", @title = "Артикул" })
+            @Html.ValidationMessageFor(m => m.VendorCode)
+            @Html.RadioButtonFor(m => m.ProductType, 0)
+            <label class="lblProductType">Штучный</label>
+            @Html.RadioButtonFor(m => m.ProductType, 1)
+            <label class="lblProductType">Весовой</label>
+            @Html.RadioButtonFor(m => m.ProductType, 2)
+            <label class="lblProductType">Алкоголь</label>
+            @Html.RadioButtonFor(m => m.ProductType, 3)
+            <label class="lblProductType">Одежда</label>
+            <br/>
+            <br />
+            @Html.TextBoxFor(m => m.Quantity, new { @placeholder = "Остаток", @title = "Остаток", @type = "number" })
+            @Html.ValidationMessageFor(m => m.Quantity)
+            @Html.DropDownListFor(m => m.GroupID, new SelectList(Model.GroupsListWithEmpty, "Value", "Text"), new { })
+            <br />
+            <br />
+            <button type="button" onclick="$('#frmProduct').submit();" class="blue">Сохранить</button>
+            <button type="button" onclick="CloseProductForm();" class="white">Отмена</button>
+        </div>
+    }
+</div>
